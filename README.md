@@ -5,7 +5,7 @@ StoreHouse is a low level library that provides a key-value cache with reference
 ## Download
 
 - [StoreHouse.js](http://raw.github.com/iammerrick/StyleManager/master/build/StoreHouse.js)
-- [StyleManager.min.js](http://raw.github.com/iammerrick/StyleManager/master/build/StoreHouse.min.js)
+- [StoreHouse.min.js](http://raw.github.com/iammerrick/StyleManager/master/build/StoreHouse.min.js)
 
 ## Usage
 
