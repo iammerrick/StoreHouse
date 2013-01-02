@@ -1,0 +1,8 @@
+{
+  "name": "StoreHouse",
+  "version": "0.0.1",
+  "description": "A model cache that means there is only one instance of a particular model given an `id`. This akes declarative UIs easier.",
+  "devDependencies": {
+    "grunt-rigger": "~0.3.0"
+  }
+}
