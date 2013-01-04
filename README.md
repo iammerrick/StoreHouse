@@ -48,7 +48,7 @@ set takes a key as the first argument and a value as the second. Set will automa
 ```javascript
 users.set('1', {
   id: 1,
-  name: 'Merrick
+  name: 'Merrick'
 });
 ```
 
