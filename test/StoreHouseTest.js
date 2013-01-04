@@ -62,6 +62,15 @@ describe('StoreHouse', function() {
       instance.clean();
       expect(instance.get('key')).to.equal(undefined);
     });
+    
+    it('should clean all items from the StoreHouse with a retainCount less than 0', function() {
+      var val = 'something';
+      instance.set('key', val);
+      instance.release('key');
+      instance.release('key');
+      instance.clean();
+      expect(instance.get('key')).to.equal(undefined);
+    });
   
     it('should clean only the items from the StoreHouse with a retainCount of 0', function() {
       var val = 'something';
