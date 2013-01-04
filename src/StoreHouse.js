@@ -49,7 +49,7 @@ var StoreHouse = Class.extend({
   
   clean: function() {
     var removeKeys = _.map(this.store, function(value, key) {
-      if (value.retainCount === 0) {
+      if (value.retainCount <= 0) {
         return key;
       }
     });
