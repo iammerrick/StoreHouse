@@ -106,6 +106,67 @@ You can also pass dispose and array of keys.
 users.dispose(['1', '2', '5']); // Remove users 1, 2 & 5 from the StoreHouse
 ```
 
+## Example
+
+Here is an example of making a CachedModel object for others to extend where each time an instance is created it checks the StoreHouse first and returns that if it exists. Otherwise, it populates the StoreHouse.
+
+### CachedModel.js
+
+```javascript
+var CachedModel = Backbone.Model.extend();
+
+var extend = function(key, protoProps, classProps) {
+  
+  var cache = StoreHouse.of(key);
+  
+  protoProps = _.extend(protoProps || {}, {
+    constructor: function(attrs) {
+      var idAttribute = protoProps.idAttribute || Model.prototype.idAttribute;
+      if ( attrs && attrs[idAttribute] && cache.get(attrs[idAttribute])) {
+        var instance = cache.get(attrs[idAttribute]);
+        instance.set(attrs);
+        return instance;
+      } else {
+        Model.prototype.constructor.apply(this, arguments);
+        if ( ! _.isUndefined(this.id)) {
+          cache.set(this.id, this);
+        }
+      }
+    }
+  });
+  
+  return Model.extend.call(this, protoProps, classProps);
+};
+
+CachedModel.extend = extend;
+```
+
+### Consuming CachedModel.js
+
+```javascript
+var Fruit = CachedModel.extend('fruit', {
+  defaults: {
+    name: 'Unknown Fruit'
+  }
+});
+
+var apple = new Fruit({
+  id: 1,
+  name: 'Apple'
+});
+
+// Then somewhere else in the project some other component requests an instance of that same model.
+
+var model = new Fruit({
+  id: 1
+});
+
+(apple === model) // True
+```
+
+This means that any time the component using the `apple` variable changes a particular value, the component using the `model` variable will see those changes propagated as well since its really the same model! However, they are completely decouple in that neither `model` nor `apple` have to depend on the other to create the instance first. They stay totally decoupled and isolated but we keep the wonderful functionality that make a declarative UI so attractive in the first place.
+
+
 ## Dependencies
 
 Really, one could remove these dependencies quite easily but I can't imagine someone using this with something other than the Backbone.js model scenario. Please let me know if you have another interesting need that garbage collection itself isn't enough.
