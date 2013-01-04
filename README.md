@@ -112,6 +112,8 @@ Here is an example of making a CachedModel object for others to extend where eac
 
 ### CachedModel.js
 
+CachedModel is a parent model other children models can extend if they want free StoreHouse caching. Pretty sexy, eh?
+
 ```javascript
 var CachedModel = Backbone.Model.extend();
 
