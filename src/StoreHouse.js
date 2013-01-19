@@ -66,7 +66,6 @@ var StoreHouse = Class.extend({
     }
 
     _.each(keys, function(key) {
-      this.store[key] = undefined;
       delete this.store[key];
     }, this);
     
